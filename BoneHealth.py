@@ -12,6 +12,23 @@ ImageFile.LOAD_TRUNCATED_IMAGES = True
 load_dotenv()
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
+# Function to get AI response
+def get_gemini_response(task_prompt, user_type, image=None, additional_input=""):
+    """Generates AI response using Google's Gemini model"""
+    model = genai.GenerativeModel('gemini-2.0-flash-thinking-exp-01-21')
+
+    # Expertise level prompt based on user type
+    expertise_prompt = f"Generate a response suitable for a {'common user' if user_type == 'Common User' else 'doctor'}"
+
+    input_data = [task_prompt, expertise_prompt, additional_input]
+
+    # Include image if provided
+    if image:
+        input_data.insert(1, image[0])
+
+    response = model.generate_content(input_data)
+    return response.text
+
 # Database setup
 conn = sqlite3.connect("users.db")
 cursor = conn.cursor()
@@ -43,13 +60,12 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Function to authenticate users
+# Authentication Functions
 def authenticate(username, password):
     cursor.execute("SELECT user_type FROM users WHERE username=? AND password=?", (username, password))
     user = cursor.fetchone()
     return user[0] if user else None
 
-# Function to register users
 def register(username, password, user_type, license_number=None):
     try:
         cursor.execute("INSERT INTO users (username, password, user_type, license_number) VALUES (?, ?, ?, ?)",
@@ -94,7 +110,7 @@ if "logged_in" not in st.session_state or not st.session_state["logged_in"]:
     st.warning("⚠️ Please log in to access the AI analysis tool.")
     st.stop()
 
-# Expertise Selection
+# Task Selection
 st.subheader("🦴 Select the analysis you want to perform")
 task = st.radio("Choose a task:", [
     "Bone Fracture Detection",
@@ -102,77 +118,134 @@ task = st.radio("Choose a task:", [
     "Knee Joint Osteoarthritis Detection",
     "Osteoporosis Stage Prediction & BMD Score",
     "Bone Age Detection",
-    "Cervical Spine Fracture Detection"
+    "Cervical Spine Fracture Detection",
+    "Bone Tumor/Cancer Detection",
+    "Bone Infection (Osteomyelitis) Detection"
 ])
 
-# Image uploader
-uploaded_file = st.file_uploader("📤 Upload an X-ray or biopsy image...", type=["jpg", "jpeg", "png"])
-if uploaded_file:
-    image = Image.open(uploaded_file)
-    st.image(image, caption="Uploaded Image", width=350, use_container_width=False)
-
-additional_input = st.text_area("📝 Provide additional details if necessary")
-submit_button = st.button("🔍 Analyze")
-
-# Function to get AI response
-def get_gemini_response(task_prompt, user_type, image=None, additional_input=""):
-    model = genai.GenerativeModel('gemini-2.0-flash-thinking-exp-01-21')
-    expertise_prompt = "Generate a response suitable for a " + ("common user" if user_type == "Common User" else "doctor")
-    input_data = [task_prompt, expertise_prompt, additional_input]
-    if image:
-        input_data.insert(1, image[0])
-    response = model.generate_content(input_data)
-    return response.text
-
-if submit_button:
-    if not uploaded_file:
-        st.warning("🚨 Please upload an image before analyzing.")
-        st.stop()
-    
-    task_prompts = {
+# Define task prompts
+task_prompts = {
     "Bone Fracture Detection": (
-        "Analyze the X-ray image for fractures and classify into different fracture types with detailed severity assessment. "
-        "For common users: Provide healing measures, recommended nutrition, exercises, and prevention steps for faster recovery. "
-        "For doctors: Suggest medical treatment options, possible surgeries, immobilization techniques, and follow-up care strategies."
+        "Analyze the X-ray, MRI, or CT scan image for fractures and classify into different fracture types with detailed severity assessment. "
+        "For common users: The image will be analyzed to check for fractures, identifying the affected bone and the type of break. "
+        "You will receive an easy-to-understand explanation of the fracture, including its severity and possible effects on movement, provide nutrition plan,steps to recover like remedies and exercises if required. "
+        "For doctors: Suggest medical treatment options, possible surgeries, immobilization techniques, and follow-up care strategies,provide nutrition plan,steps to recover like remedies and exercises if required. "
     ),
-    
+
     "Bone Marrow Cell Classification": (
-        "Analyze the biopsy image and classify bone marrow cells into relevant categories, identifying concerning cells. "
-        "For common users: Explain the significance of detected cell types and provide basic guidance on maintaining bone health. "
-        "For doctors: Provide detailed insights into abnormal cell structures, possible diagnoses, and recommended medical interventions."
+        "Analyze the biopsy or MRI image and classify bone marrow cells into relevant categories, identifying concerning cells. "
+        "For common users: The image will be analyzed to check for abnormalities in bone marrow cells. "
+        "You will receive a simple explanation of the findings, including whether there are unusual cell changes and what they might indicate,provide nutrition plan,steps to recover like remedies and exercises if required. "
+        "For doctors: Provide detailed insights into abnormal cell structures, possible diagnoses, and recommended medical interventions,provide nutrition plan,steps to recover like remedies and exercises if required. "
     ),
-    
+
     "Knee Joint Osteoarthritis Detection": (
-        "Analyze the knee X-ray and classify osteoarthritis severity based on clinical grading. "
-        "For common users: Provide lifestyle modifications, exercises, diet, and pain management strategies. "
-        "For doctors: Suggest advanced treatments, medications, physiotherapy plans, and surgical options such as knee replacement."
+        "Analyze the knee X-ray or MRI and classify osteoarthritis severity based on clinical grading. "
+        "For common users: The image will be assessed for signs of knee osteoarthritis, including joint space narrowing and bone changes. "
+        "You will get an easy-to-understand report on whether osteoarthritis is present and its severity level, along with its impact on knee function,provide nutrition plan,steps to recover like remedies and exercises if required. "
+        "For doctors: Suggest advanced treatments, medications, physiotherapy plans, and surgical options such as knee replacement,provide nutrition plan,steps to recover like remedies and exercises if required."
+        
     ),
-    
+
     "Osteoporosis Stage Prediction & BMD Score": (
         "Analyze the bone X-ray and determine osteoporosis stage with estimated Bone Mineral Density (BMD) score. "
-        "For common users: Offer guidance on calcium-rich diet, supplements, exercise routines, and ways to prevent further bone loss. "
-        "For doctors: Recommend specific medications, hormone therapy, and advanced treatments to manage and prevent complications."
+        "For common users: The scan will be analyzed to determine how strong or weak the bones are and whether osteoporosis is present. "
+        "You will receive a simple explanation of the results, including whether bone density is lower than normal and what it means for bone health,provide nutrition plan,steps to recover like remedies and exercises if required. "
+        "For doctors: Recommend specific medications, hormone therapy, and advanced treatments to manage and prevent complications,provide nutrition plan,steps to recover like remedies and exercises if required."
     ),
-    
+
     "Bone Age Detection": (
         "Analyze the X-ray of a child's hand and predict bone age with insights into growth patterns. "
-        "For common users: Explain how bone age relates to growth, provide nutrition tips, and suggest exercises for optimal development. "
-        "For doctors: Offer insights into growth abnormalities, hormonal imbalances, and necessary medical interventions if delayed growth is detected."
+        "For common users: The scan will be assessed to check how well the bones are developing compared to the expected growth pattern for the child’s age. "
+        "You will receive an easy-to-understand result explaining whether the bone growth is normal, advanced, or delayed,provide nutrition plan,steps to recover like remedies and exercises if required. "
+        "For doctors: Offer insights into growth abnormalities, hormonal imbalances, and necessary medical interventions if delayed growth is detected,provide nutrition plan,steps to recover like remedies and exercises if required."
     ),
-    
+
     "Cervical Spine Fracture Detection": (
-        "Analyze the CT scan of the cervical spine for fractures and provide a severity assessment. "
-        "For common users: Provide information on precautions, pain management, and recommended postural corrections. "
-        "For doctors: Suggest medical treatment plans, possible surgical options, and rehabilitation strategies for full recovery."
+        "Analyze the X-ray, MRI, or CT scan of the cervical spine for fractures and provide a severity assessment. "
+        "For common users: The scan will be analyzed for fractures in the neck bones, and you will receive an explanation of the findings. "
+        "The report will describe whether a fracture is present, its severity, and how it may affect movement or pain levels,provide nutrition plan,steps to recover like remedies and exercises if required"
+        "For doctors: Suggest medical treatment plans, possible surgical options, and rehabilitation strategies for full recovery,provide nutrition plan,steps to recover like remedies and exercises if required"
+    ),
+
+    "Bone Tumor/Cancer Detection": (
+        "Analyze the X-ray, MRI, CT scan, or biopsy image for possible bone tumors or cancerous growths. "
+        "For common users: The image will be checked for any unusual growths or masses in the bone, and you will receive a simple explanation of the findings. "
+        "If any suspicious areas are detected, the report will describe their size, location, and whether they appear concerning,provide nutrition plan,steps to recover like remedies and exercises if required."
+        "For doctors: Provide detailed insights into tumor classification, possible malignancy assessment, and treatment options,provide nutrition plan,steps to recover like remedies and exercises if required. "
+    ),
+
+    "Bone Infection (Osteomyelitis) Detection": (
+        "Analyze the X-ray, MRI, CT scan, or biopsy image for signs of bone infection (osteomyelitis). "
+        "For common users: The image will be checked for any signs of infection in the bone, such as swelling, bone damage, or abscess formation. "
+        "You will receive an easy-to-understand explanation of whether an infection is present and how it may be affecting the bone,provide nutrition plan,steps to recover like remedies and exercises if required."
+        "For doctors: Provide insights on infection severity, possible antibiotic treatments, and surgical recommendations if needed,provide nutrition plan,steps to recover like remedies and exercises if required."
     )
 }
 
+# Store the task prompt
+task_prompt = task_prompts.get(task, "Perform the selected medical imaging analysis.")
+
+# Clear previous responses and uploaded image when switching tasks
+if "selected_task" not in st.session_state or st.session_state.selected_task != task:
+    st.session_state.selected_task = task
+    st.session_state.message_log = [{"role": "ai", "content": f"📢 You are now analyzing: **{task}**. Please upload an image and ask questions."}]
+    st.session_state.pop("uploaded_image", None)
+
+# Image uploader
+uploaded_file = st.file_uploader("📤 Upload an X-ray, CT scan, MRI, or biopsy image...", type=["jpg", "jpeg", "png"])
+if uploaded_file:
+    st.session_state.uploaded_image = uploaded_file
+    image = Image.open(uploaded_file)
+    st.image(image, caption="Uploaded Image", width=350, use_container_width=False)
+
+# Analyze button
+if st.button("🔍 Analyze"):
+    if uploaded_file:
+        with st.spinner("🧠 Analyzing..."):
+            image_data = [{"mime_type": uploaded_file.type, "data": uploaded_file.getvalue()}]
+            ai_analysis = get_gemini_response(task_prompt, st.session_state["user_type"], image_data)
+            st.session_state.message_log.append({"role": "ai", "content": ai_analysis})
+            st.success("✅ Analysis Complete! See results below.")
+    else:
+        st.warning("⚠️ Please upload an image before analyzing.")
+
+# Chat container
+chat_container = st.container()
+with chat_container:
+    for message in st.session_state.message_log:
+        with st.chat_message(message["role"]):
+            st.markdown(f"**{message['role'].capitalize()}:** {message['content']}")
+
+# Chat input
+irrelevant_keywords = ["pm", "president", "capital", "weather", "politics", "sports"]
+greeting_keywords = ["hi", "hello", "hey", "good morning", "good afternoon", "good evening"]
+appreciation_keywords = ["thank you", "thanks", "great work", "well done", "appreciate", "good job"]
+
+user_query = st.chat_input("Ask follow-up questions or request detailed analysis...")
+
+if user_query:
+    # Display user query in chat
+    st.session_state.message_log.append({"role": "user", "content": user_query})
+
+    response_text = ""
+
+    # Respond to greetings
+    if any(word in user_query.lower() for word in greeting_keywords):
+        response_text = "😊 Hello! How can I assist you today?"
     
-    image_data = [{"mime_type": uploaded_file.type, "data": uploaded_file.getvalue()}]
-    response = get_gemini_response(task_prompts[task], st.session_state["user_type"], image_data, additional_input)
+    # Respond to appreciation
+    elif any(word in user_query.lower() for word in appreciation_keywords):
+        response_text = "🙏 You're very welcome! I'm glad I could help. Let me know if there's anything else I can do for you. 😊"
     
-    st.markdown("<h4 style='color: #27AE60;'>📊 Analysis Result</h4>", unsafe_allow_html=True)
-    st.markdown(
-        f"<div style='background-color:#E8F5E9;padding:15px;border-radius:10px;font-size:16px;color:#1B2631;'>{response}</div>",
-        unsafe_allow_html=True
-    )
+    # Check for irrelevant keywords
+    elif any(word in user_query.lower() for word in irrelevant_keywords):
+        response_text = "⚠️ Please ask relevant questions related to the selected analysis."
+    
+    # Process normal queries
+    else:
+        response_text = get_gemini_response(task_prompt, st.session_state["user_type"], None, user_query)
+
+    # Display AI response
+    st.session_state.message_log.append({"role": "ai", "content": response_text})
+    st.rerun()
