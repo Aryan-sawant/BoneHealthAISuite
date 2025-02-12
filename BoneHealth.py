@@ -205,6 +205,11 @@ if st.button("🔍 Analyze"):
         with st.spinner("🧠 Analyzing..."):
             image_data = [{"mime_type": uploaded_file.type, "data": uploaded_file.getvalue()}]
             ai_analysis = get_gemini_response(task_prompt, st.session_state["user_type"], image_data)
+
+            # Store the analysis context in session_state for later use
+            st.session_state["analysis_context"] = ai_analysis
+
+            # Add analysis result to message log
             st.session_state.message_log.append({"role": "ai", "content": ai_analysis})
             st.success("✅ Analysis Complete! See results below.")
     else:
@@ -230,21 +235,30 @@ if user_query:
 
     response_text = ""
 
-    # Respond to greetings
-    if any(word in user_query.lower() for word in greeting_keywords):
+    # Respond to greetings (ensure it only matches standalone greetings)
+    if any(word.lower() == user_query.lower().strip() for word in greeting_keywords):
         response_text = "😊 Hello! How can I assist you today?"
-    
+
     # Respond to appreciation
     elif any(word in user_query.lower() for word in appreciation_keywords):
         response_text = "🙏 You're very welcome! I'm glad I could help. Let me know if there's anything else I can do for you. 😊"
-    
+
     # Check for irrelevant keywords
     elif any(word in user_query.lower() for word in irrelevant_keywords):
         response_text = "⚠️ Please ask relevant questions related to the selected analysis."
-    
+
     # Process normal queries
     else:
-        response_text = get_gemini_response(task_prompt, st.session_state["user_type"], None, user_query)
+        # Generate a response using the analysis context
+        analysis_context = st.session_state.get("analysis_context", None)
+        if analysis_context:
+            response_text = get_gemini_response(
+                task_prompt="Answer the follow-up question based on the previous context.",
+                user_type=st.session_state["user_type"],
+                additional_input=f"Context: {analysis_context}\nUser Query: {user_query}"
+            )
+        else:
+            response_text = "⚠️ I don't have any analysis context to refer to. Please analyze an image first or provide more details about your question."
 
     # Display AI response
     st.session_state.message_log.append({"role": "ai", "content": response_text})
