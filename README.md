@@ -1,6 +1,6 @@
 # 🦴 Bone Health AI Suite 🌌
 
-[![Streamlit App](https://img.shields.io/badge/Streamlit-App-orange?style=flat-square&logo=streamlit)](https://streamlit.io/)
+[![Streamlit App](https://img.shields.io/badge/Streamlit-App-orange?style=flat-square&logo=streamlit)](https://bonehealthaisuite.streamlit.app/)
 [![Python](https://img.shields.io/badge/Python-3.8+-blue?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
 
 ## ✨ Empowering Bone Health with Advanced AI Analysis ✨
