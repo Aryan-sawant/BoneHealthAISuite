@@ -2,7 +2,6 @@
 
 [![Streamlit App](https://img.shields.io/badge/Streamlit-App-orange?style=flat-square&logo=streamlit)](https://streamlit.io/)
 [![Python](https://img.shields.io/badge/Python-3.8+-blue?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
 ## ✨ Empowering Bone Health with Advanced AI Analysis ✨
 
@@ -42,25 +41,23 @@ Follow these steps to set up and run the Bone Health AI Suite application locall
 1.  **Clone the Repository:**
 
     ```bash
-    git clone [repository URL]
-    cd [repository-name]
+    git clone https://github.com/Aryan-sawant/BoneHealthAISuite.git
+    cd BoneHealthAISuite
     ```
-    Replace `[repository URL]` with the actual URL of your GitHub repository and `[repository-name]` with the name of the cloned directory.
 
 2.  **Set up Environment Variables:**
 
     *   **Create a `.env` file** in the root directory of your project (if you haven't already).
-    *   **Obtain a Google Cloud API Key:** You need to get an API key from Google Cloud to use the Gemini AI model.
-        *   Go to the [Google Cloud Console](https://console.cloud.google.com/).
+    *   **Obtain a Google AI Studio API Key:** You need to get an API key from Google AI Studio to use the Gemini AI model.
+        *   Go to [Google AI Studio](https://makersuite.google.com/).
         *   Create a project or select an existing one.
-        *   Enable the "Generative Language API" for your project.
-        *   Go to "Credentials" and create an API key.
+        *   Go to "API keys" in the sidebar and create an API key.
     *   **Add your API key to the `.env` file:**
 
         ```
-        GOOGLE_API_KEY=YOUR_GOOGLE_API_KEY
+        GOOGLE_API_KEY=YOUR_GOOGLE_AI_STUDIO_API_KEY
         ```
-        **Important:** Replace `YOUR_GOOGLE_API_KEY` with your actual Google Cloud API key. **Do not commit your `.env` file with your API key to GitHub if it's a public repository!** Consider adding `.env` to your `.gitignore` file.
+        **Important:** Replace `YOUR_GOOGLE_AI_STUDIO_API_KEY` with your actual Google AI Studio API key. **Do not commit your `.env` file with your API key to GitHub if it's a public repository!** Consider adding `.env` to your `.gitignore` file.
 
 3.  **Install Python Dependencies:**
 
@@ -102,10 +99,6 @@ Follow these steps to set up and run the Bone Health AI Suite application locall
 ## ⚠️ Disclaimer
 
 **Important:** This application is intended for educational and demonstration purposes only. It is **not a medical device** and should not be used for clinical diagnosis or treatment decisions. The AI's analysis is based on the provided image and may not be accurate or complete. Always consult with a qualified medical professional for any health concerns, diagnoses, or treatment plans.
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🤝 Contributing
 
