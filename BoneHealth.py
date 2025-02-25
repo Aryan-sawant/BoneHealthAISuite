@@ -52,56 +52,57 @@ st.set_page_config(
     layout="wide"
 )
 
-# Premium CSS Styling with Cobalt Blue Theme
+# --- UPDATED PREMIUM CSS STYLING WITH SIDEBAR ANIMATION & 3D EFFECTS ---
 st.markdown(
     """
     <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
     body {
-        /* background-color: #f0f2f6;  Old background */
-        background: linear-gradient(to bottom, #E6F7FF, #C0E0FF); /* Light Cobalt Blue gradient background */
-        color: #2E4053; /* Darker text for better contrast on light blue */
-        font-family: 'Helvetica Neue', sans-serif;
-        overflow: hidden;
+        background: linear-gradient(to bottom, #E6F7FF, #D0E8FA);
+        color: #333;
+        font-family: 'Roboto', sans-serif;
+        overflow-x: hidden;
     }
 
     .stApp {
         max-width: 100vw;
         min-height: 100vh;
         margin: 0;
-        padding: 25px 30px;
+        padding: 35px 40px;
         display: flex;
         flex-direction: column;
         align-items: stretch;
-        background: transparent; /* Make stApp background transparent */
+        background: transparent;
     }
 
     .highlight-box {
-        background: linear-gradient(135deg, #A9CCE3, #D4E6F1); /* Cobalt Blue highlight box gradient */
-        padding: 20px;
-        border-radius: 10px;
-        margin-bottom: 25px;
-        box-shadow: 8px 8px 15px rgba(0,0,0,0.15), -5px -5px 10px rgba(255,255,255,0.6);
-        animation: fadeIn 1.5s ease-out forwards; /* Added Fade-in Animation */
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(5px);
+        padding: 30px;
+        border-radius: 15px;
+        margin-bottom: 30px;
+        box-shadow: 12px 12px 25px rgba(0,0,0,0.1), -8px -8px 15px rgba(255,255,255,0.6);
+        animation: fadeIn 1.5s ease-out forwards;
         opacity: 0;
     }
     @keyframes fadeIn {
         to { opacity: 1; }
     }
 
-
     .highlight-box:hover {
-        box-shadow: 10px 10px 20px rgba(0,0,0,0.18), -7px -7px 12px rgba(255,255,255,0.7);
+        box-shadow: 15px 15px 30px rgba(0,0,0,0.12), -10px -10px 18px rgba(255,255,255,0.7);
         transform: scale(1.005);
     }
 
-    .highlight-box h1 { /* Enhanced Main Title Styling */
-        color: #0B5394; /* Darker Cobalt Blue for heading */
-        font-size: 3.2em; /* Increased size */
-        margin-bottom: 8px;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2), 0 0 8px rgba(255, 255, 255, 0.5); /* Enhanced shadow & glow */
-        font-weight: 700; /* Bold font weight */
-        letter-spacing: -1.5px; /* Tighter letter spacing */
-        animation: pulseTitle 3s infinite alternate, fadeInTitle 1.5s ease-out forwards 0.5s; /* Pulse animation and staggered fade-in */
+    .highlight-box h1 {
+        color: #0B5394;
+        font-size: 3.6em;
+        margin-bottom: 12px;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15), 0 0 10px rgba(255, 255, 255, 0.4);
+        font-weight: 700;
+        letter-spacing: -1.8px;
+        animation: pulseTitle 3s infinite alternate, fadeInTitle 1.5s ease-out forwards 0.5s;
         opacity: 0;
         transition: text-shadow 0.3s ease;
     }
@@ -111,273 +112,263 @@ st.markdown(
     }
 
     @keyframes pulseTitle {
-        0% { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2), 0 0 8px rgba(255, 255, 255, 0.5); transform: scale(1); }
-        100% { text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.25), 0 0 12px rgba(255, 255, 255, 0.7); transform: scale(1.02); }
+        0% { text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15), 0 0 10px rgba(255, 255, 255, 0.4); transform: scale(1); }
+        100% { text-shadow: 3px 3px 7px rgba(0, 0, 0, 0.2), 0 0 14px rgba(255, 255, 255, 0.6); transform: scale(1.02); }
     }
-
 
     .highlight-box h4 {
-        color: #4D5656; /* Slightly darker paragraph text */
-        font-size: 1.1em;
-        margin-bottom: 15px;
+        color: #555;
+        font-size: 1.2em;
+        margin-bottom: 20px;
         text-shadow: 0.5px 0.5px 1px rgba(255, 255, 255, 0.5);
-        font-style: normal; /* Removed italic style */
-        font-weight: 500; /* Adjusted font weight */
+        font-style: normal;
+        font-weight: 400;
         opacity: 0.9;
+        line-height: 1.6;
     }
 
-    /* Task Option Box Styling - Cobalt Blue Gradient Background */
     .task-option-box {
-        background: linear-gradient(135deg, #A9CCE3, #D4E6F1); /* Cobalt Blue task box gradient - More Saturated */
-        padding: 20px;
-        border-radius: 15px; /* More rounded corners */
-        margin-bottom: 25px;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(5px);
+        padding: 25px;
+        border-radius: 20px;
+        margin-bottom: 30px;
         box-shadow:
-            12px 12px 20px rgba(0,0,0,0.1), /* Stronger primary shadow */
-            -8px -8px 15px rgba(255,255,255,0.7); /* Softer highlight shadow */
+            15px 15px 25px rgba(0,0,0,0.08),
+            -10px -10px 18px rgba(255,255,255,0.7);
         transition: box-shadow 0.3s ease, transform 0.3s ease;
-        animation: fadeInUp 1s ease-out forwards 0.8s; /* Fade-in up animation for task box */
+        animation: fadeInUp 1s ease-out forwards 0.8s;
         transform: translateY(20px);
         opacity: 0;
-        border: 2px solid #85C1E9; /* Added border for better definition */
+        border: 1px solid #AED6F1;
     }
 
     @keyframes fadeInUp {
         to { transform: translateY(0); opacity: 1; }
     }
 
-
     .task-option-box:hover {
         box-shadow:
-            15px 15px 25px rgba(0,0,0,0.12), /* Slightly stronger hover shadow */
-            -10px -10px 18px rgba(255,255,255,0.8); /* Brighter hover highlight */
-        transform: scale(1.01); /* Gentle scale up on hover */
+            18px 18px 30px rgba(0,0,0,0.1),
+            -12px -12px 20px rgba(255,255,255,0.8);
+        transform: scale(1.01);
     }
 
-    .task-option-box h2 { /* Style inside the task box if needed */
-        color: #0B5394; /* Darker Cobalt Blue for task box heading */
-        font-size: 1.9em; /* Slightly larger than highlight-box h2 */
-        margin-bottom: 10px;
-        text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.8); /* Refined text shadow */
-        font-weight: bold;
+    .task-option-box h2 {
+        color: #0B5394;
+        font-size: 2.1em;
+        margin-bottom: 15px;
+        text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.7);
+        font-weight: 600;
         opacity: 1;
-        letter-spacing: -0.8px; /* Slightly tighter letter spacing */
-        animation: fadeInText 1s ease-out forwards 1.2s; /* Fade-in animation with delay */
+        letter-spacing: -1px;
+        animation: fadeInText 1s ease-out forwards 1.2s;
         opacity: 0;
     }
     @keyframes fadeInText {
         to { opacity: 1; }
     }
 
-
-    .task-option-box p { /* Style paragraphs inside task box */
-        color: #4D5656; /* Slightly darker text */
-        font-size: 1.0em;
-        margin-bottom: 12px;
-        text-shadow: 0.4px 0.4px 0.8px rgba(255, 255, 255, 0.6); /* Softer text shadow */
+    .task-option-box p {
+        color: #666;
+        font-size: 1.1em;
+        margin-bottom: 15px;
+        text-shadow: 0.4px 0.4px 0.8px rgba(255, 255, 255, 0.6);
         transform: translateY(0);
-        opacity: 0.9;
-        animation: fadeInParagraph 1s ease-out forwards 1.5s; /* Fade-in animation with delay */
+        opacity: 0.85;
+        animation: fadeInParagraph 1s ease-out forwards 1.5s;
         opacity: 0;
+        line-height: 1.5;
     }
     @keyframes fadeInParagraph {
-        to { opacity: 0.9; }
+        to { opacity: 0.85; }
     }
 
-
+    /* Animated Sidebar */
     .stSidebar {
-        background: linear-gradient(to bottom, #D4E6F1, #A9CCE3); /* Cobalt Blue sidebar gradient */
-        padding: 25px 20px;
-        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(8px);
+        padding: 30px 25px;
+        border-radius: 15px;
         border: none;
-        box-shadow: 10px 10px 20px rgba(0,0,0,0.18), -7px -7px 12px rgba(255,255,255,0.6);
-        animation: slideInSidebar 1s ease-out forwards 0.3s; /* Slide-in animation for sidebar */
-        transform: translateX(-50px);
-        opacity: 0;
+        box-shadow: 12px 12px 25px rgba(0,0,0,0.1), -8px -8px 15px rgba(255,255,255,0.6);
+        position: fixed; /* Fixed position for animation */
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 280px; /* Adjust sidebar width as needed */
+        transform: translateX(-280px); /* Initially hidden */
+        transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out; /* Smooth animation */
+        opacity: 0.95;
+        z-index: 1000; /* Ensure sidebar is on top */
     }
 
-    @keyframes slideInSidebar {
-        to { transform: translateX(0); opacity: 1; }
+    .stSidebar.expanded {
+        transform: translateX(0); /* Slide in when expanded class is added */
     }
-
 
     .stSidebar:hover {
-        box-shadow: 12px 12px 25px rgba(0,0,0,0.22), -10px -10px 20px rgba(255,255,255,0.75);
-        transform: scale(1.003);
+        box-shadow: 15px 15px 30px rgba(0,0,0,0.12), -10px -10px 18px rgba(255,255,255,0.75);
     }
 
     .stSidebar h2 {
-        color: #0B5394; /* Darker Cobalt Blue for sidebar heading */
-        font-size: 1.7em;
-        margin-bottom: 10px;
+        color: #0B5394;
+        font-size: 1.8em;
+        margin-bottom: 12px;
         text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.6);
-        font-weight: bold;
+        font-weight: 600;
         opacity: 1;
     }
-
 
     .stSidebar .stButton > button, .stButton > button.st-ef {
-        background: linear-gradient(to bottom, #0B5394, #08457E); /* Cobalt Blue button gradient */
+        background: linear-gradient(to bottom, #0C69C6, #085394);
         color: white;
         border: none;
-        border-radius: 8px;
-        padding: 10px 20px;
-        font-weight: 600;
+        border-radius: 10px;
+        padding: 12px 24px;
+        font-weight: 500;
         width: auto;
-        min-width: 100px;
-        box-shadow: 4px 4px 10px rgba(0,0,0,0.18), -3px -3px 6px rgba(255,255,255,0.5);
+        min-width: 110px;
+        box-shadow: 5px 5px 12px rgba(0,0,0,0.15), -4px -4px 8px rgba(255,255,255,0.5);
         animation: none;
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
     }
-
 
     .stSidebar .stButton > button:hover, .stButton > button.st-ef:hover {
-        transform: translateY(-2px);
-        box-shadow: 5px 5px 12px rgba(0,0,0,0.22), -4px -4px 8px rgba(255,255,255,0.6);
+        transform: translateY(-3px);
+        box-shadow: 6px 6px 15px rgba(0,0,0,0.18), -5px -5px 10px rgba(255,255,255,0.6);
     }
     .stSidebar .stButton > button:active, .stButton > button.st-ef:active {
-        transform: translateY(1px);
-        box-shadow: 2px 2px 5px rgba(0,0,0,0.2) inset, -1px -1px 3px rgba(255,255,255,0.5) inset;
-    }
-
-    .stTextInput > div > div > input {
-        border-radius: 8px;
-        border: 1px solid #85C1E9; /* Light Cobalt Blue border for input */
-        padding: 10px;
-        font-size: 1.0rem;
-        box-shadow: inset 2px 2px 5px rgba(0,0,0,0.08), inset -2px -2px 4px rgba(255,255,255,0.5);
-        opacity: 1;
         transform: translateY(0);
+        box-shadow: 3px 3px 7px rgba(0,0,0,0.2) inset, -2px -2px 4px rgba(255,255,255,0.5) inset;
     }
 
+    .stTextInput > div > div > input, .stChatInputContainer > div > div > textarea {
+        border-radius: 10px;
+        border: 1px solid #AED6F1;
+        padding: 12px;
+        font-size: 1.05rem;
+        box-shadow: inset 3px 3px 6px rgba(0,0,0,0.05), inset -2px -2px 4px rgba(255,255,255,0.4);
+        opacity: 0.95;
+        transform: translateY(0);
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
 
-    /* Radio Buttons - Cobalt Blue Highlight and Compact Spacing */
+    .stTextInput > div > div > input:focus, .stChatInputContainer > div > div > textarea:focus {
+        border-color: #0C69C6;
+        box-shadow: inset 4px 4px 8px rgba(0,0,0,0.07), inset -3px -3px 5px rgba(255,255,255,0.5), 0 0 0 0.2rem rgba(11, 105, 198, .2);
+        outline: none;
+    }
+
     .stRadio > div {
-        gap: 1.5rem;
+        gap: 2rem;
         display: flex;
         flex-direction: column;
         opacity: 1;
     }
 
-
     .stRadio > div > label {
         display: flex;
         align-items: center;
-        margin-bottom: 10px;
+        margin-bottom: 12px;
         cursor: pointer;
-        background-color: rgba(255, 255, 255, 0.8);
-        padding: 8px 14px;
-        border-radius: 15px;
-        box-shadow: 2px 2px 4px rgba(0,0,0,0.05), -1px -1px 2px rgba(255,255,255,0.3);
+        background-color: rgba(255, 255, 255, 0.95);
+        padding: 10px 18px;
+        border-radius: 20px;
+        box-shadow: 3px 3px 6px rgba(0,0,0,0.04), -2px -2px 4px rgba(255,255,255,0.3);
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out;
     }
     .stRadio > div > label:hover {
         transform: scale(1.01);
-        box-shadow: 3px 3px 6px rgba(0,0,0,0.08), -2px -2px 4px rgba(255,255,255,0.4);
-        background-color: rgba(255, 255, 255, 0.9);
+        box-shadow: 4px 4px 8px rgba(0,0,0,0.06), -3px -3px 5px rgba(255,255,255,0.35);
+        background-color: rgba(255, 255, 255, 1);
     }
 
-    /* Target the input element directly when checked */
     .stRadio > div > label > div:first-child input[type="radio"] {
-        appearance: none; /* Remove default radio button appearance */
-        -webkit-appearance: none; /* For Safari */
-        -moz-appearance: none; /* For Firefox */
-        width: 20px;
-        height: 20px;
-        border: 1.5px solid #0B5394; /* Cobalt Blue border */
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        width: 22px;
+        height: 22px;
+        border: 2px solid #0C69C6;
         border-radius: 50%;
         background: linear-gradient(160deg, #ffffff, #f0f0f0);
-        margin-right: 10px;
+        margin-right: 12px;
         position: relative;
         cursor: pointer;
-        display: inline-block; /* Ensure it's inline for label alignment */
+        display: inline-block;
     }
     .stRadio > div > label > div:first-child input[type="radio"]:hover {
-        border-color: #08457E; /* Darker Cobalt Blue hover border */
-        box-shadow: 2px 2px 5px rgba(0,0,0,0.15), -2px -2px 3px rgba(255,255,255,0.4);
+        border-color: #085394;
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.1), -2px -2px 3px rgba(255,255,255,0.35);
         transform: scale(1.03);
     }
 
-    /* Style the "inner dot" when checked - Cobalt Blue */
     .stRadio > div > label > div:first-child input[type="radio"]:checked {
-        background-color: #0B5394 !important; /* Solid Cobalt Blue Background when checked */
-        border-color: #0B5394 !important;     /* Cobalt Blue Border when checked */
-        box-shadow: inset 2px 2px 4px rgba(0,0,0,0.1) !important, inset -1px -1px 2px rgba(255,255,255,0.3) !important;
+        background-color: #0C69C6 !important;
+        border-color: #0C69C6 !important;
+        box-shadow: inset 2px 2px 4px rgba(0,0,0,0.08) !important, inset -1px -1px 2px rgba(255,255,255,0.3) !important;
     }
-    .stRadio > div > label > div:first-child input[type="radio"]:checked + span::before { /* Using a pseudo-element for the inner dot */
+    .stRadio > div > label > div:first-child input[type="radio"]:checked + span::before {
         content: '';
         display: block;
-        position: absolute; /* Position relative to the input */
+        position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 10px;
-        height: 10px;
-        background-color: white !important; /* White inner dot for Cobalt Blue */
+        width: 12px;
+        height: 12px;
+        background-color: white !important;
         border-radius: 50%;
     }
 
-
     .stRadio > div > label > span {
-        font-size: 1.0rem;
-        color: #2E4053; /* Darker text for radio labels */
+        font-size: 1.15rem;
+        color: #444;
         font-weight: 500;
-        position: relative; /* Needed for pseudo-element positioning */
+        position: relative;
+        text-shadow: 0.5px 0.5px 1px rgba(255, 255, 255, 0.5);
     }
     .stRadio > div > label > span:hover {
          text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.6);
     }
 
-
     .stChatMessage {
-        border-radius: 10px;
-        padding: 10px 18px;
-        margin-bottom: 10px;
-        box-shadow: 2px 2px 5px rgba(0,0,0,0.05), -1px -1px 3px rgba(255,255,255,0.3);
+        border-radius: 15px;
+        padding: 12px 20px;
+        margin-bottom: 12px;
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.03), -1px -1px 3px rgba(255,255,255,0.2);
         transform: translateY(0);
-        opacity: 1;
+        opacity: 0.98;
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
     }
-
 
     .stChatMessage:hover {
         transform: scale(1.002);
-        box-shadow: 3px 3px 6px rgba(0,0,0,0.08), -2px -2px 4px rgba(255,255,255,0.4);
+        box-shadow: 3px 3px 6px rgba(0,0,0,0.05), -2px -2px 4px rgba(255,255,255,0.3);
     }
 
     .stChatMessage.user {
-        background: linear-gradient(to right, #D4E6F1, #EAF2F8); /* User chat Cobalt Blue */
+        background: rgba(228, 243, 255, 0.8);
         border: none;
-        color: #2E4053; /* Darker user text */
-        box-shadow: 1px 1px 3px rgba(0,0,0,0.03), -1px -1px 2px rgba(255,255,255,0.2);
+        color: #444;
+        box-shadow: 1px 1px 3px rgba(0,0,0,0.02), -1px -1px 2px rgba(255,255,255,0.15);
     }
     .stChatMessage.assistant {
-        background: linear-gradient(to left, #EAF2F8, #F5FBFF); /* Assistant chat Light Cobalt Blue */
+        background: rgba(245, 250, 255, 0.8);
         border: none;
-        color: #2E4053; /* Darker assistant text */
-        box-shadow: 1px 1px 3px rgba(0,0,0,0.03), -1px -1px 2px rgba(255,255,255,0.2);
-    }
-
-    .stChatInputContainer > div > div > textarea {
-        border-radius: 8px;
-        border: 1px solid #85C1E9; /* Light Cobalt Blue border for chat input */
-        padding: 8px;
-        font-size: 0.95rem;
-        box-shadow: inset 2px 2px 5px rgba(0,0,0,0.08), inset -2px -2px 4px rgba(255,255,255,0.5);
-        opacity: 1;
-        transform: translateY(0);
-    }
-     .stChatInputContainer > div > div > textarea:focus {
-        border-color: #0B5394; /* Cobalt Blue focus border for chat input */
-        box-shadow: inset 3px 3px 7px rgba(0,0,0,0.09), inset -3px -3px 5px rgba(255,255,255,0.6), 0 0 0 0.2rem rgba(11, 83, 148, .25); /* Cobalt Blue focus shadow */
-        outline: 0;
+        color: #444;
+        box-shadow: 1px 1px 3px rgba(0,0,0,0.02), -1px -1px 2px rgba(255,255,255,0.15);
     }
 
     hr {
         border: none;
-        height: 1.5px;
-        background: linear-gradient(to right, #85C1E9, #D4E6F1, #85C1E9); /* Cobalt Blue hr gradient */
-        margin-bottom: 25px;
-        box-shadow: 1px 1px 2px rgba(0,0,0,0.05), -1px -1px 2px rgba(255,255,255,0.3);
+        height: 2px;
+        background: linear-gradient(to right, #AED6F1, #D0E8FA, #AED6F1);
+        margin-bottom: 35px;
+        box-shadow: 1px 1px 2px rgba(0,0,0,0.03), -1px -1px 2px rgba(255,255,255,0.2);
         transform: scaleX(1);
-        animation: growHorizontal 1s ease-out forwards 1.8s; /* Horizontal grow animation for hr */
+        animation: growHorizontal 1s ease-out forwards 1.8s;
         transform-origin: left center;
         transform: scaleX(0);
     }
@@ -385,34 +376,36 @@ st.markdown(
         to { transform: scaleX(1); }
     }
 
-
-    /* Analyze Image Button - Navy Blue - FORCED */
-    div.stButton > button:first-child { /* More specific selector */
-        background: linear-gradient(to bottom, #000080, #000050) !important; /* Navy Blue Button Gradient - Forced */
+    div.stButton > button:first-child {
+        background: linear-gradient(to bottom, #000080, #000060) !important;
         color: white !important;
-        box-shadow: 4px 4px 10px rgba(0,0,0,0.25), -3px -3px 6px rgba(255,255,255,0.4) !important;
-        border-color: transparent !important; /* Remove any default border */
-        animation: fadeInButton 1s ease-out forwards 2.1s; /* Fade-in for Analyze Button */
+        box-shadow: 5px 5px 12px rgba(0,0,0,0.2), -4px -4px 8px rgba(255,255,255,0.3) !important;
+        border-color: transparent !important;
+        animation: fadeInButton 1s ease-out forwards 2.1s;
         opacity: 0;
+        border-radius: 12px !important;
+        padding: 12px 24px !important;
+        font-weight: 500 !important;
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
     }
     @keyframes fadeInButton {
         to { opacity: 1; }
     }
 
-
     div.stButton > button:first-child:hover {
-        box-shadow: 5px 5px 12px rgba(0,0,0,0.3), -4px -4px 8px rgba(255,255,255,0.5) !important;
+        box-shadow: 6px 6px 15px rgba(0,0,0,0.25), -5px -5px 10px rgba(255,255,255,0.4) !important;
+        transform: translateY(-2px);
     }
     div.stButton > button:first-child:active {
-        box-shadow: 2px 2px 5px rgba(0,0,0,0.3) inset, -1px -1px 3px rgba(255,255,255,0.4) inset !important;
+        box-shadow: 3px 3px 7px rgba(0,0,0,0.25) inset, -2px -2px 4px rgba(255,255,255,0.3) inset !important;
+        transform: translateY(0);
     }
 
-    /* Uploaded Image 3D Border */
     .stImage > div > div > img {
-        border: 8px solid #f0f0f0;
-        border-radius: 12px;
-        box-shadow: 6px 6px 12px rgba(0,0,0,0.15), -4px -4px 8px rgba(255,255,255,0.5);
-        animation: zoomInImage 1s ease-out forwards 2.4s; /* Zoom-in animation for image */
+        border: 10px solid #f8f8f8;
+        border-radius: 15px;
+        box-shadow: 8px 8px 15px rgba(0,0,0,0.1), -5px -5px 10px rgba(255,255,255,0.4);
+        animation: zoomInImage 1s ease-out forwards 2.4s;
         transform: scale(0.8);
         opacity: 0;
     }
@@ -420,38 +413,86 @@ st.markdown(
         to { transform: scale(1); opacity: 1; }
     }
 
-
-    /* Section Title Styling - Select Task and Upload Image */
     .stApp h3 {
-        color: #0B5394; /* Darker Cobalt Blue for section headings */
-        font-size: 2.1em; /* Increased size */
-        margin-bottom: 15px;
-        text-shadow: 1.5px 1.5px 3px rgba(255, 255, 255, 0.7); /* Enhanced text shadow */
-        font-weight: 700; /* Bold font weight */
-        letter-spacing: -1px; /* Tighter letter spacing */
+        color: #0B5394;
+        font-size: 2.3em;
+        margin-bottom: 20px;
+        text-shadow: 1.5px 1.5px 3px rgba(255, 255, 255, 0.6);
+        font-weight: 600;
+        letter-spacing: -1.2px;
         opacity: 1;
-        animation: fadeInSectionTitle 1s ease-out forwards 2.7s; /* Fade-in animation for section titles */
+        animation: fadeInSectionTitle 1s ease-out forwards 2.7s;
         opacity: 0;
     }
     @keyframes fadeInSectionTitle {
         to { opacity: 1; }
     }
 
-
-    .stApp h3 i { /* Style for the bone icon in section titles */
-        margin-right: 5px; /* Add some spacing after the icon */
-        font-size: 1.1em; /* Slightly adjust icon size if needed */
-        vertical-align: middle; /* Vertically align the icon with the text */
-        color: #0B5394; /* Icon color same as title */
+    .stApp h3 i {
+        margin-right: 8px;
+        font-size: 1.1em;
+        vertical-align: middle;
+        color: #0B5394;
+        opacity: 0.9;
     }
 
-
-    .stApp p[style*="color: #4D5656;"] { /* Targeting styled paragraphs */
-        animation: fadeInParagraphs 1s ease-out forwards 3s; /* Fade-in animation for paragraphs */
+    .stApp p[style*="color: #4D5656;"] {
+        color: #666 !important;
+        line-height: 1.6;
+        animation: fadeInParagraphs 1s ease-out forwards 3s;
         opacity: 0;
     }
      @keyframes fadeInParagraphs {
-        to { opacity: 0.9; }
+        to { opacity: 0.85; }
+    }
+
+    .task-option-box .stRadio > div > label > span {
+        font-size: 1.2rem;
+        color: #444;
+        font-weight: 500;
+        text-shadow: 0.5px 0.5px 1px rgba(255, 255, 255, 0.5);
+    }
+    .task-option-box .stRadio > div > label {
+        background-color: rgba(255, 255, 255, 0.98);
+        padding: 12px 20px;
+        margin-bottom: 15px;
+        border-radius: 22px;
+        box-shadow: 3px 3px 6px rgba(0,0,0,0.05), -2px -2px 4px rgba(255,255,255,0.3);
+    }
+    .task-option-box .stRadio > div > label:hover {
+         box-shadow: 4px 4px 8px rgba(0,0,0,0.07), -3px -3px 5px rgba(255,255,255,0.35);
+         background-color: rgba(255, 255, 255, 1);
+    }
+
+    .stChatContainer {
+        padding-top: 20px;
+    }
+
+    /* Hamburger Menu Button for Sidebar Toggle */
+    .sidebar-toggle-button {
+        position: fixed; /* Fixed button position */
+        top: 15px;
+        left: 15px;
+        background-color: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(5px);
+        border: none;
+        border-radius: 8px;
+        padding: 8px 12px;
+        cursor: pointer;
+        z-index: 1001; /* Above sidebar */
+        box-shadow: 3px 3px 6px rgba(0,0,0,0.08), -2px -2px 4px rgba(255,255,255,0.3);
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .sidebar-toggle-button:hover {
+        background-color: rgba(255, 255, 255, 0.95);
+        box-shadow: 4px 4px 8px rgba(0,0,0,0.1), -3px -3px 5px rgba(255,255,255,0.4);
+    }
+    .sidebar-toggle-button:active {
+        box-shadow: inset 2px 2px 4px rgba(0,0,0,0.1), inset -1px -1px 2px rgba(255,255,255,0.3);
+    }
+    .sidebar-toggle-button i {
+        font-size: 1.4em;
+        color: #0B5394;
     }
 
 
@@ -465,15 +506,15 @@ st.markdown(
     """
     <div class="highlight-box">
         <div style="text-align: center; margin-bottom: 15px;">
-            <h1 style="color: #0B5394; font-size: 2.8em; margin-bottom: 8px; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); transition: text-shadow 0.3s ease;">
+            <h1 style="color: #0B5394; font-size: 3.2em; margin-bottom: 10px; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); transition: text-shadow 0.3s ease;">
                 <i class="fas fa-hospital-symbol"></i> 🦴 Bone Health AI Suite 🌌
             </h1>
-            <h4 style="color: #4D5656; font-weight: 500; font-style: italic; font-size: 1.0em; text-shadow: 0.5px 0.5px 1px rgba(255, 255, 255, 0.3); transition: text-shadow 0.3s ease;">
+            <h4 style="color: #555; font-weight: 400; font-style: italic; font-size: 1.1em; text-shadow: 0.5px 0.5px 1px rgba(255, 255, 255, 0.3); transition: text-shadow 0.3s ease; line-height: 1.6;">
                 ✨ Empowering Bone Health with Advanced AI Analysis ✨
             </h4>
         </div>
     </div>
-    <hr style="margin-bottom: 30px;">
+    <hr style="margin-bottom: 35px;">
     """,
     unsafe_allow_html=True
 )
@@ -493,13 +534,22 @@ def register(username, password, user_type, license_number=None, specialization=
     except sqlite3.IntegrityError:
         return False
 
+# Sidebar State Management
+if "sidebar_expanded" not in st.session_state:
+    st.session_state.sidebar_expanded = False
+
+def toggle_sidebar():
+    st.session_state.sidebar_expanded = not st.session_state.sidebar_expanded
+
+# Hamburger Menu Button (Outside Sidebar)
+st.button("☰ Menu", on_click=toggle_sidebar, key="sidebar_toggle_button", type="primary", use_container_width=False) # Changed to st.button instead of markdown for button functionality
 # Premium Sidebar for Login/Signup
 with st.sidebar:
-    st.markdown("## 🔑 **Account Access**", unsafe_allow_html=True)
+    st.markdown(f"## 🔑 **Account Access**", unsafe_allow_html=True) # Title with Key Emoji
     auth_option = st.radio("**Choose an option:**", ["Login", "Signup"])
 
     if auth_option == "Signup":
-        st.markdown("### 📝 Create Account", unsafe_allow_html=True)
+        st.markdown("### 📝 Create Account", unsafe_allow_html=True) # Title with Writing Hand Emoji
         new_username = st.text_input("Username")
         new_password = st.text_input("Password", type="password", )
         user_type = st.radio("User Type:", ["Common User", "Doctor"])
@@ -507,8 +557,8 @@ with st.sidebar:
 
         # Doctor Specific Fields
         if user_type == "Doctor":
-            st.markdown("<hr style='margin: 15px 0;'>", unsafe_allow_html=True) # Separator line
-            st.markdown("#### 🩺 Doctor Credentials", unsafe_allow_html=True) # Subheader
+            st.markdown("<hr style='margin: 15px 0;'>", unsafe_allow_html=True)
+            st.markdown("#### 🩺 Doctor Credentials", unsafe_allow_html=True) # Title with Stethoscope Emoji
             specialization = st.text_input("Specialization (e.g., Orthopedics)")
             affiliation = st.text_input("Hospital/Clinic Affiliation")
         else:
@@ -518,13 +568,13 @@ with st.sidebar:
         if st.button("Signup"):
             if user_type == "Doctor" and (not specialization or not affiliation or not license_number):
                 st.error("❌ Doctors must provide Specialization, Affiliation, and License Number.")
-            elif register(new_username, new_password, user_type, license_number, specialization, affiliation): # Passing new fields to register
+            elif register(new_username, new_password, user_type, license_number, specialization, affiliation):
                 st.success("✅ Account created successfully. Please login.")
             else:
                 st.error("❌ Username already exists!")
 
     elif auth_option == "Login":
-        st.markdown("### 🚪 Login", unsafe_allow_html=True)
+        st.markdown("### 🚪 Login", unsafe_allow_html=True) # Title with Door Emoji
         username = st.text_input("Username")
         password = st.text_input("Password", type="password")
         if st.button("Login"):
@@ -545,6 +595,31 @@ with st.sidebar:
                 st.success(f"✅ Logged in as **{user_role}**")
             else:
                 st.error("❌ Invalid credentials!")
+
+# Apply sidebar expanded class based on state
+if st.session_state.sidebar_expanded:
+    st.markdown(
+        """
+        <style>
+            .stSidebar {
+                transform: translateX(0); /* Slide in */
+            }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+else:
+    st.markdown(
+        """
+        <style>
+            .stSidebar {
+                transform: translateX(-280px); /* Slide out */
+            }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
 
 # Initialize message_log if not present
 if "message_log" not in st.session_state:
@@ -576,36 +651,6 @@ task_radio = st.radio( # Assign radio to a variable to style labels
 )
 st.markdown('</div>', unsafe_allow_html=True) # Close task-option-box
 
-# Apply premium style to radio button labels within task-option-box
-st.markdown(
-    """
-    <style>
-        .task-option-box .stRadio > div > label > span {
-            font-size: 1.1rem; /* Increased font size */
-            color: #2E4053;
-            font-weight: 600; /* Bold font weight */
-            text-shadow: 0.6px 0.6px 1px rgba(255, 255, 255, 0.5); /* Refined text shadow */
-        }
-        .task-option-box .stRadio > div > label {
-            background-color: rgba(255, 255, 255, 0.9); /* Slightly more opaque background */
-            padding: 10px 18px; /* Increased padding */
-            margin-bottom: 12px; /* Increased margin */
-            border-radius: 18px; /* More rounded labels */
-            box-shadow: 3px 3px 6px rgba(0,0,0,0.06), -2px -2px 4px rgba(255,255,255,0.35); /* Refined shadow */
-        }
-        .task-option-box .stRadio > div > label:hover {
-             box-shadow: 4px 4px 8px rgba(0,0,0,0.09), -3px -3px 5px rgba(255,255,255,0.4); /* Hover shadow stronger */
-             background-color: rgba(255, 255, 255, 0.95); /* Slightly lighter on hover */
-             transform: scale(1.005); /* Gentle scale on hover */
-        }
-
-
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
-
 task = task_radio # Use the assigned variable for task value
 
 # Task Prompts (No change in content)
@@ -629,7 +674,7 @@ task_prompts = {
         "For common users: The image will be assessed for signs of knee osteoarthritis, including joint space narrowing and bone changes. "
         "You will get an easy-to-understand report on whether osteoarthritis is present and its severity level, along with its impact on knee function,provide nutrition plan,steps to recover like remedies and exercises if required. "
         "For doctors: Suggest advanced treatments, medications, physiotherapy plans, and surgical options such as knee replacement,provide nutrition plan,steps to recover like remedies and exercises if required."
-        
+
     ),
 
     "Osteoporosis Stage Prediction & BMD Score": (
