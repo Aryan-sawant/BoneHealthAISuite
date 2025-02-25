@@ -106,7 +106,7 @@ Contributions are welcome! If you have suggestions for improvements or bug fixes
 
 ## ✉️ Contact
 
-For questions or feedback, please contact [Your Name/Email or GitHub Profile Link].
+For questions or feedback, please contact Aryan Sawant/umeshsawant112233@gmail.com.
 
 ---
 
