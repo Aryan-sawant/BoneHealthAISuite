@@ -2,6 +2,7 @@
 
 [![Streamlit App](https://img.shields.io/badge/Streamlit-App-orange?style=flat-square&logo=streamlit)](https://bonehealthaisuite.streamlit.app/)
 [![Python](https://img.shields.io/badge/Python-3.8+-blue?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
 ## ✨ Empowering Bone Health with Advanced AI Analysis ✨
 
@@ -99,6 +100,10 @@ Follow these steps to set up and run the Bone Health AI Suite application locall
 ## ⚠️ Disclaimer
 
 **Important:** This application is intended for educational and demonstration purposes only. It is **not a medical device** and should not be used for clinical diagnosis or treatment decisions. The AI's analysis is based on the provided image and may not be accurate or complete. Always consult with a qualified medical professional for any health concerns, diagnoses, or treatment plans.
+
+## 📝 License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ## 🤝 Contributing
 
