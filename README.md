@@ -2,7 +2,7 @@
 
 [![Streamlit App](https://img.shields.io/badge/Streamlit-App-orange?style=flat-square&logo=streamlit)](https://bonehealthaisuite.streamlit.app/)
 [![Python](https://img.shields.io/badge/Python-3.8+-blue?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://github.com/Aryan-sawant/BoneHealthAISuite/blob/main/LICENSE)
 
 ## ✨ Empowering Bone Health with Advanced AI Analysis ✨
 
